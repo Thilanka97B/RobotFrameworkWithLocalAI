@@ -1,4 +1,4 @@
-# Robot Framework SDET Exercise
+# RobotFrameworkWithAI
 
 UI automation framework for [SauceDemo](https://www.saucedemo.com/) using Robot Framework, Python, and Selenium.
 
