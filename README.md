@@ -84,6 +84,12 @@ Run the custom library unit tests:
 python -m unittest discover -s tests/unit
 ```
 
+Run the AI-style custom tool demonstration:
+
+```powershell
+robot -d results tests/ai
+```
+
 ## Test Coverage
 
 The UI test suites cover:
@@ -129,4 +135,3 @@ Generate Checkout Test Ideas
 - Tests isolate page-level behavior into resource files to keep suite files concise.
 - The framework avoids hard sleeps and uses explicit wait keywords around browser interactions.
 - Reports are written to `results/`, which is ignored by Git.
-
