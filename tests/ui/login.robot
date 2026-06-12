@@ -5,6 +5,7 @@ Resource            ../../resources/pages/inventory_page.resource
 Suite Setup         Open Test Browser
 Suite Teardown      Close Test Browser
 Test Setup          Go To    ${BASE_URL}
+Test Teardown       Analyze Failure If Test Failed
 
 *** Test Cases ***
 Standard User Can Log In

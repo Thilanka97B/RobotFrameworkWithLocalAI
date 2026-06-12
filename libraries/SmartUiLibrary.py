@@ -75,8 +75,25 @@ class SmartUiLibrary:
             if enabled_headless:
                 options.add_argument("--headless=new")
             options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-notifications")
+            options.add_argument("--disable-popup-blocking")
+            options.add_argument(
+                "--disable-features=PasswordLeakDetection,PasswordManagerOnboarding,"
+                "AutofillServerCommunication"
+            )
             options.add_argument("--no-sandbox")
             options.add_argument("--window-size=1440,1000")
+            options.add_experimental_option(
+                "prefs",
+                {
+                    "credentials_enable_service": False,
+                    "profile.password_manager_leak_detection": False,
+                    "profile.default_content_setting_values.notifications": 2,
+                    "profile.password_manager_enabled": False,
+                },
+            )
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options.add_experimental_option("useAutomationExtension", False)
             return options
 
         if normalized_browser in {"edge", "msedge"}:
@@ -85,7 +102,22 @@ class SmartUiLibrary:
             options = EdgeOptions()
             if enabled_headless:
                 options.add_argument("--headless=new")
+            options.add_argument("--disable-notifications")
+            options.add_argument("--disable-popup-blocking")
+            options.add_argument(
+                "--disable-features=PasswordLeakDetection,PasswordManagerOnboarding,"
+                "AutofillServerCommunication"
+            )
             options.add_argument("--window-size=1440,1000")
+            options.add_experimental_option(
+                "prefs",
+                {
+                    "credentials_enable_service": False,
+                    "profile.password_manager_leak_detection": False,
+                    "profile.default_content_setting_values.notifications": 2,
+                    "profile.password_manager_enabled": False,
+                },
+            )
             return options
 
         if normalized_browser == "firefox":

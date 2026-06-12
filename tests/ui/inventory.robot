@@ -5,6 +5,7 @@ Resource            ../../resources/pages/inventory_page.resource
 Suite Setup         Open Test Browser
 Suite Teardown      Close Test Browser
 Test Setup          Login To Inventory
+Test Teardown       Analyze Failure If Test Failed
 
 *** Keywords ***
 Login To Inventory
@@ -25,4 +26,3 @@ Cart Badge Updates When Product Is Added And Removed
     Cart Badge Should Show    1
     Remove Backpack From Cart
     Cart Badge Should Not Be Visible
-

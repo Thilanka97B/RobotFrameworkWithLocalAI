@@ -7,6 +7,7 @@ Resource            ../../resources/pages/checkout_page.resource
 Suite Setup         Open Test Browser
 Suite Teardown      Close Test Browser
 Test Setup          Start Checkout With Backpack
+Test Teardown       Analyze Failure If Test Failed
 
 *** Keywords ***
 Start Checkout With Backpack
@@ -30,4 +31,3 @@ Checkout Requires First Name
     [Tags]    checkout    negative
     Continue Checkout Without Information
     Checkout Error Should Contain    First Name is required
-

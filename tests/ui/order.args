@@ -1,0 +1,3 @@
+tests/ui/login.robot
+tests/ui/inventory.robot
+tests/ui/checkout.robot
