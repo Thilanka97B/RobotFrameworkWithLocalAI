@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../config/environments.robot
-Library     SeleniumLibrary    timeout=${DEFAULT_TIMEOUT}
+Library     SeleniumLibrary    timeout=${DEFAULT_TIMEOUT}    run_on_failure=Capture Page Screenshot    screenshot_root_directory=${OUTPUT DIR}
 Library     ../libraries/SmartUiLibrary.py
 Library     ../libraries/AIAnalyzer.py
 
