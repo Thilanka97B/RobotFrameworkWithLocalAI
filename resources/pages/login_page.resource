@@ -26,3 +26,15 @@ Login Error Should Contain
     Wait Until Element Is Visible    ${LOGIN_ERROR_MESSAGE}
     Element Should Contain    ${LOGIN_ERROR_MESSAGE}    ${message}
 
+Attempt Login With Only Password
+    [Arguments]    ${password}=${PASSWORD}
+    Wait Until Element Is Visible    ${LOGIN_USERNAME_INPUT}
+    Input Password    ${LOGIN_PASSWORD_INPUT}    ${password}
+    Click Button    ${LOGIN_BUTTON}
+
+Attempt Login With Only Username
+    [Arguments]    ${username}
+    Wait Until Element Is Visible    ${LOGIN_USERNAME_INPUT}
+    Input Text    ${LOGIN_USERNAME_INPUT}    ${username}
+    Click Button    ${LOGIN_BUTTON}
+
