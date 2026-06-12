@@ -12,7 +12,11 @@ Open Test Browser
     Set Window Size    1440    1000
 
 Close Test Browser
-    Run Keyword And Ignore Error    Capture Page Screenshot
+    # capture a suite-level screenshot with a timestamp
+    ${ts}=    Get Time    epoch
+    ${safe_suite}=    Replace String    ${SUITE NAME}    ${SPACE}    _
+    ${suite_file}=    Set Variable    ${OUTPUT DIR}/${safe_suite}_suite_${ts}.png
+    Run Keyword And Ignore Error    Capture Page Screenshot    ${suite_file}
     IF    '${SUITE STATUS}' == 'PASS'
         Log    Successfully passed automation suite
         Log To Console    Successfully passed automation suite
@@ -26,6 +30,11 @@ Close Test Browser
 
 Analyze Failure If Test Failed
     IF    '${TEST STATUS}' == 'FAIL'
+        # capture a screenshot for debugging (filename includes test name and timestamp)
+        ${ts}=    Get Time    epoch
+        ${safe_name}=    Replace String    ${TEST NAME}    ${SPACE}    _
+        ${file}=    Set Variable    ${OUTPUT DIR}/${safe_name}_${ts}.png
+        Run Keyword And Ignore Error    Capture Page Screenshot    ${file}
         ${analysis}=    Analyze Failure    ${TEST MESSAGE}
         Log To Console    \nAI Failure Analyzer:
         Log To Console    ${analysis}
