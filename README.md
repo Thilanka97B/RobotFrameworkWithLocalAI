@@ -182,6 +182,38 @@ If a test passes, the console/log shows a success message instead.
 
 The AI analyzer is wired through `resources/common.resource` using test and suite teardown keywords. Suite-level analysis is included so setup failures, such as browser driver issues, are also analyzed.
 
+### AI Analyzer Example
+
+When a test fails, the analyzer provides intelligent feedback. Example scenario: a login test with wrong credentials fails:
+
+**Test Failure:**
+```
+Login As    invalid_user    wrong_password
+Login Error Should Contain    Username and password do not match
+```
+
+**AI Response (Terminal + Log):**
+```
+### 1. Root Cause
+
+The test failed because the username 'invalid_user' and password 'wrong_password' do not match any valid credentials in the system. SauceDemo only accepts specific test user accounts with the password 'secret_sauce'.
+
+### 2. Fix Suggestion
+
+1. Use a valid test account: standard_user, locked_out_user, or performance_glitch_user
+2. Verify the password is 'secret_sauce' for all test accounts
+3. If testing negative scenarios, ensure the expected error message matches what the app displays
+
+### 3. Severity
+
+Low - This is expected behavior for invalid credentials validation. The test is working correctly.
+```
+
+The AI response appears in:
+- Console output during test execution
+- `results/log.html` under the teardown section for each test
+- Suite summary at the end of test run
+
 ## Resource Files
 
 The `.resource` files keep test cases clean and reusable:
