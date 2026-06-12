@@ -236,6 +236,31 @@ The UI test suites cover:
 - end-to-end checkout
 - required checkout information validation
 
+### Recent Additions
+
+- New inventory UI tests added:
+  - Sort products Name Z to A
+  - Sort products Price high to low
+  - Product details page opens correctly
+  - Product image/title/price are visible
+  - Multiple products can be added to cart
+
+- New checkout UI tests added:
+  - Checkout requires last name
+  - Checkout requires postal code
+  - Checkout overview shows correct item
+  - Checkout total is displayed
+  - Cancel checkout returns to inventory/cart
+
+- New login tests added:
+  - Blank username shows required error
+  - Blank password shows required error
+  - Performance glitch user login behavior
+
+- New library: `libraries/AIAnalyzer.py` — sends failure messages to local
+  Ollama (`qwen2.5:1.5b`) and logs AI analysis (root cause, fix suggestion,
+  severity) on test/suite failures.
+
 ## Test Folders
 
 `tests/ui`
