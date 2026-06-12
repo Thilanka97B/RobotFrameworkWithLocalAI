@@ -149,6 +149,36 @@ results/report.html
 
 Use `results/log.html` for detailed keyword logs, screenshots, and AI analyzer responses.
 
+### Allure Report
+
+This project supports generating Allure reports from Robot Framework results.
+
+1. Install Python dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+2. Install Allure Commandline (required):
+
+- Windows (scoop): `scoop install allure`
+- macOS (brew): `brew install allure2`
+- Or download from https://docs.qameta.io/allure/
+
+3. Run tests with Robot (normal run):
+
+```powershell
+\.venv\Scripts\python.exe -m robot -d results .\tests\ui\login.robot
+```
+
+4. Generate Allure report (helper script):
+
+```powershell
+.\	ools\generate_allure_report.ps1
+```
+
+This copies `results/output.xml` to `allure-results/` and runs `allure generate` to produce `allure-report/index.html`.
+
 `results-dryrun/` is only used for dry-run validation and can be deleted anytime.
 
 ## AI Failure Analyzer
