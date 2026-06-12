@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../config/environments.robot
-Library     SeleniumLibrary    timeout=${DEFAULT_TIMEOUT}    run_on_failure=Capture Page Screenshot    screenshot_root_directory=${OUTPUT DIR}
+Library     SeleniumLibrary    timeout=${DEFAULT_TIMEOUT}    run_on_failure=Safe Capture Page Screenshot    screenshot_root_directory=${OUTPUT DIR}
 Library     ../libraries/SmartUiLibrary.py
 Library     ../libraries/AIAnalyzer.py
 
@@ -43,3 +43,16 @@ Analyze Failure If Test Failed
         Log To Console    Successfully passed automation test: ${TEST NAME}
         Log    Successfully passed automation test
     END
+
+*** Keywords ***
+Safe Capture Page Screenshot
+    [Arguments]    ${name}=None
+    ${os}=    Evaluate    __import__('os')
+    IF    '${name}' == 'None' or '${name}' == ''
+        ${ts}=    Get Time    epoch
+        ${name}=    Set Variable    selenium-screenshot-${ts}.png
+    ELSE
+        ${base}=    Evaluate    __import__('os').path.splitext(r'''${name}''')[0]
+        ${name}=    Set Variable    ${base}.png
+    END
+    Capture Page Screenshot    ${OUTPUT DIR}/${name}
