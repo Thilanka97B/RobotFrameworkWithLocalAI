@@ -12,11 +12,15 @@ The project demonstrates maintainable keyword-driven tests, reusable page resour
 - Python custom libraries
 - Ollama with `qwen2.5:1.5b` for local AI failure analysis
 - unittest for fast custom-library checks
+ - Allure Framework (Allure report)
 
 ## Project Structure
 
 ```text
 .
+|-- .venv/
+|-- allure-report/
+|-- allure-results/
 |-- config/
 |   `-- environments.robot
 |-- libraries/
@@ -40,6 +44,8 @@ The project demonstrates maintainable keyword-driven tests, reusable page resour
 |   |   `-- order.args
 |   `-- unit/
 |       `-- test_smart_ui_library.py
+|-- results/
+|-- tools/
 |-- pyproject.toml
 |-- requirements.txt
 `-- README.md
@@ -165,19 +171,42 @@ pip install -r requirements.txt
 - macOS (brew): `brew install allure2`
 - Or download from https://docs.qameta.io/allure/
 
-3. Run tests with Robot (normal run):
+3. Run tests with Robot and collect Allure results
+
+PowerShell (quote the listener so the semicolon is passed):
 
 ```powershell
-\.venv\Scripts\python.exe -m robot -d results .\tests\ui\login.robot
+.\.venv\Scripts\python.exe -m robot -d results --listener 'allure_robotframework;allure-results' .\tests\ui\
 ```
 
-4. Generate Allure report (helper script):
+Run using the execution order file:
 
 ```powershell
-.\	ools\generate_allure_report.ps1
+.\.venv\Scripts\python.exe -m robot -d results --listener 'allure_robotframework;allure-results' -A tests/ui/order.args
 ```
 
-This copies `results/output.xml` to `allure-results/` and runs `allure generate` to produce `allure-report/index.html`.
+4. Generate Allure HTML report:
+
+```powershell
+allure generate .\allure-results -o .\allure-report --clean
+```
+
+5. Open the report:
+
+```powershell
+allure open .\allure-report
+# Or serve with Python if Allure CLI is not available:
+python -m http.server 8080 --directory .\allure-report
+Start-Process http://localhost:8080
+```
+
+6. Helper script (optional):
+
+```powershell
+.\tools\generate_allure_report.ps1
+```
+
+This script copies `results/output.xml` to `allure-results/` and runs `allure generate` to produce `allure-report/index.html`.
 
 `results-dryrun/` is only used for dry-run validation and can be deleted anytime.
 
